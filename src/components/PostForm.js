@@ -38,7 +38,7 @@ class PostForm extends Component {
             }
         }
         axios
-            .post("/posts", quiz,
+            .post("/posts/", quiz,
                 {
                     header: {
                         'Content-Type': 'application/json'
