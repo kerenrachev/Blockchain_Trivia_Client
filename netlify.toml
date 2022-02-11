@@ -7,7 +7,7 @@ from = "/quiz"
 to = "https://kmcblockchain.herokuapp.com/quiz"
 
 [[redirects]]
-from = "/posts/"
+from = "/posts"
 to = "https://kmcblockchain.herokuapp.com/posts/:splat"
 status = 200
 force = true
