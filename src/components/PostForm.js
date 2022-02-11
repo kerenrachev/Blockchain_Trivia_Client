@@ -40,6 +40,7 @@ class PostForm extends Component {
         axios
             .post("/posts/", quiz,
                 {
+                    method: "POST",
                     header: {
                         'Content-Type': 'application/json'
                     }

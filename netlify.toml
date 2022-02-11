@@ -11,7 +11,7 @@ from = "/posts/"
 to = "https://kmcblockchain.herokuapp.com/posts/:splat"
 status = 200
 force = true
-headers = { X-From = "Netlify", X-Forwarded-Host = "https://kmcblockchain.herokuapp.com/" }
+
 
 [[redirects]]
 from = "/initiateAccountInDB"
