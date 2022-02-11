@@ -18,6 +18,11 @@ to = "https://kmcblockchain.herokuapp.com/initiateAccountInDB"
 from = "/withdraw"
 to = "https://kmcblockchain.herokuapp.com/withdraw"
 
+[[headers]]
+  # Define which paths this specific [[headers]] block will cover.
+  for = "/*"
+    [headers.values]
+    Access-Control-Allow-Origin = "*"
 
 
 
