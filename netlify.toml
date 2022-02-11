@@ -20,7 +20,7 @@ to = "https://kmcblockchain.herokuapp.com/withdraw"
 
 [[headers]]
   # Define which paths this specific [[headers]] block will cover.
-  for = "/*"
+  for = "https://kmcblockchain.herokuapp.com/*"
     [headers.values]
     Access-Control-Allow-Origin = "*"
 
