@@ -62,6 +62,7 @@ class ClientView extends Component {
           <h4 id="room">{this.props.dataFromParent.room}</h4>
           <h3>Users in quiz:</h3>
           <ul id="users"></ul>
+          <h4 id="prize"></h4>
           <h1 id="timer"></h1>
           {this.state.viewTimerEnded ? (
             <div>
@@ -265,13 +266,14 @@ class ClientView extends Component {
           let txt = contract
             .transfer(recieverAddress, transferAmount)
             .then((result) => {
-              this.socket.on("roomUsers", ({ room, users }) => {
+              this.socket.on("roomUsers", ({ room, users, prize }) => {
                 //this.outputRoomName(room);
                 console.log("client - inside socket on room users");
-                this.outputUsers(users);
+                this.outputUsers(users, prize);
               });
               let address = addressResult;
-              this.socket.emit("joinRoom", { username, room, address });
+              let amount = this.quiz.amount
+              this.socket.emit("joinRoom", { username, room, address, amount});
               this.socket.on("renderNextQuestionForRoom", ({ room, currQ }) => {
                 this.wasIRight = false;
                 this.lastScore = 0;
@@ -354,13 +356,14 @@ class ClientView extends Component {
     this.roomName.innerText = room;
   }
 
-  outputUsers(users) {
+  outputUsers(users, prize) {
     this.userList.innerHTML = "";
     users.forEach((user) => {
       const li = document.createElement("li");
       li.innerText = user.username;
       this.userList.appendChild(li);
     });
+    document.getElementById("prize").innerHTML = prize + " KMC"
   }
 }
 

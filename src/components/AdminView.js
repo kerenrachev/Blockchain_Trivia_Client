@@ -27,6 +27,7 @@ class AdminView extends Component {
           <h4 id="room">{this.props.dataFromParent.room}</h4>
           <h3>Users in quiz:</h3>
           <ul id="users"></ul>
+          <h4 id="prize"></h4>
           <h1 id="timer"></h1>
           {this.state.waitingLobby ? (
             <div>
@@ -87,11 +88,12 @@ class AdminView extends Component {
     let username = this.username;
     let room = this.room;
     let address = "garbageAddress";
+    let amount = this.quiz.amount
     this.socket.emit("joinRoom", { username, room, address });
-    this.socket.emit("startQuizInRoom", { username, room });
+    this.socket.emit("startQuizInRoom", { username, room,amount });
 
-    this.socket.on("roomUsers", ({ room, users }) => {
-      this.outputUsers(users);
+    this.socket.on("roomUsers", ({ room, users, prize }) => {
+      this.outputUsers(users, prize);
     });
     this.socket.on("BestUsersList", ({ room, bestUsers }) => {
       for (var i = 0; i < bestUsers.length; i++) {
@@ -179,13 +181,14 @@ class AdminView extends Component {
     this.roomName.innerText = room;
   }
 
-  outputUsers(users) {
+  outputUsers(users, prize) {
     this.userList.innerHTML = "";
     users.forEach((user) => {
       const li = document.createElement("li");
       li.innerText = user.username;
       this.userList.appendChild(li);
     });
+    document.getElementById("prize").innerHTML = prize+ " KMC"
   }
 
   startQuiz() {
