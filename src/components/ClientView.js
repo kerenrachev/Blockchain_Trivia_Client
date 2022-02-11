@@ -8,7 +8,7 @@ const io = require("socket.io-client");
 class ClientView extends Component {
   constructor(props) {
     super(props);
-    this.socket = io();
+    this.socket =  io('/',{transports: ['websocket'],upgrade:false})
     this.id = "";
     this.quiz = this.props.dataFromParent.quiz.data;
     this.contractAddress = "0x3010cEd1Ea7D28880A40c9c3e79eA85A2dD28515";

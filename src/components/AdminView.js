@@ -4,7 +4,7 @@ const io = require("socket.io-client");
 class AdminView extends Component {
   constructor(props) {
     super(props);
-    this.socket = io();
+    this.socket =  io('/',{transports: ['websocket'],upgrade:false})
     this.quiz = this.props.dataFromParent.quiz.data;
     //console.log("the quizzzz:"+this.quiz)
     this.state = {
