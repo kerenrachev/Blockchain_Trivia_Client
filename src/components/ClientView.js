@@ -78,9 +78,11 @@ class ClientView extends Component {
             <div>
               {this.state.questionsDisabled ? null : (
                 <div>
+                 <h3 id="titlaDiv"></h3>
+                <div class= "questionDiv">
                   {/* <h5> seconds left: </h5> */}
 
-                  <h3 id="titlaDiv"></h3>
+                 
                   <h2 id="q"></h2>
                   <input
                     type="radio"
@@ -121,25 +123,14 @@ class ClientView extends Component {
                   <br></br>
                   <br></br>
                   <form onSubmit={this.submitQuestion}>
-                     <button  class="button-55"
-                      style={{
-                        fontFamily: "Century Gothic",
-                        fontSize: "14px",
-                        color: "black",
-                        backgroundColor: "linen",
-                        borderRadius: "14px",
-                        borderColor: "tan",
-                        padding: "12px",
-                        margin: "13px",
-                      }}
+                     <button id="submitAnswer" class="button-55"
                       type="submit"
                       value="Submit Question"
-                      id="submitAnswer"
                     >
                       Submit Question
                     </button>
                   </form>
-                </div>
+                </div></div>
               )}
             </div>
           )}
@@ -162,6 +153,7 @@ class ClientView extends Component {
         break;
       }
     }
+    console.log("Question submitted")
     document.getElementById("submitAnswer").hidden = true;
     if (answer === this.quiz.questions[this.state.currQuestion].c) {
       let timeLeft = document.getElementById("timer").innerHTML;
