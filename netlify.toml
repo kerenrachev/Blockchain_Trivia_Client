@@ -7,8 +7,8 @@ from = "/quiz"
 to = "https://kmcblockchain.herokuapp.com/quiz"
 
 [[redirects]]
-from = "/posts"
-to = "https://kmcblockchain.herokuapp.com/posts"
+from = "/posts/"
+to = "https://kmcblockchain.herokuapp.com/posts/"
 
 [[redirects]]
 from = "/initiateAccountInDB"
