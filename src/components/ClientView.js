@@ -39,10 +39,10 @@ class ClientView extends Component {
     });
     this.socket.on("BestUsersList", ({ room, bestUsers }) => {
       for (var i = 0; i < bestUsers.length; i++) {
-        console.log("i" + i + "length" + bestUsers.length);
-        console.log("in client, userName: " + bestUsers[i].username);
-        document.getElementById("p" + (i + 1)).innerHTML =
-          i + 1 + ")" + bestUsers[i].username + " Score: " + bestUsers[i].score;
+          let bestUsersList = document.getElementById("bestUsers");
+          const li = document.createElement("li");
+          li.innerText = bestUsers[i].username + " Score: " +bestUsers[i].score;
+          bestUsersList.appendChild(li);
       }
     });
   }
@@ -56,10 +56,11 @@ class ClientView extends Component {
     return (
       <>
         <div>
-          <h3 style={{ fontFamily: "Century Gothic" }}>Username:</h3>
+          <h3>Username:</h3>
           <h4 id="username">{this.props.dataFromParent.userName}</h4>
-          <h3 style={{ fontFamily: "Century Gothic" }}>Quiz ID:</h3>
+          <h3>Quiz ID:</h3>
           <h4 id="room">{this.props.dataFromParent.room}</h4>
+          <h3>Users in quiz:</h3>
           <ul id="users"></ul>
           <h1 id="timer"></h1>
           {this.state.viewTimerEnded ? (
@@ -67,7 +68,7 @@ class ClientView extends Component {
               {this.state.quizEnded ? (
                 <div>
                   {" "}
-                  <h1 style={{ fontFamily: "Century Gothic" }}> Quiz Ended </h1>
+                  <h1> Quiz Ended </h1>
                   <h1 id="imWinner"></h1>
                 </div>
               ) : null}
@@ -120,7 +121,7 @@ class ClientView extends Component {
                   <br></br>
                   <br></br>
                   <form onSubmit={this.submitQuestion}>
-                    <button
+                     <button  class="button-55"
                       style={{
                         fontFamily: "Century Gothic",
                         fontSize: "14px",
@@ -163,7 +164,6 @@ class ClientView extends Component {
     }
     document.getElementById("submitAnswer").hidden = true;
     if (answer === this.quiz.questions[this.state.currQuestion].c) {
-      console.log("answer is correct");
       let timeLeft = document.getElementById("timer").innerHTML;
       score = 10 * timeLeft;
       this.wasIRight = true;
@@ -172,7 +172,6 @@ class ClientView extends Component {
       let room = this.room;
       this.socket.emit("ansIsCorrect", { username, room, score });
     } else {
-      console.log("wrong answer");
       this.wasIRight = false;
     }
   };
@@ -188,16 +187,15 @@ class ClientView extends Component {
     }
     return (
       <div>
-        <h1 style={{ fontFamily: "Century Gothic" }}>{str}</h1>
-        <h2 style={{ fontFamily: "Century Gothic" }}>
+        <h1>{str}</h1>
+        <h2>
           {" "}
           You have gained {score} points for this question.{" "}
         </h2>
-        <h2 id="p1"></h2>
         <br></br>
-        <h2 id="p2"></h2>
-        <br></br>
-        <h2 id="p3"></h2>
+        <h1>BEST SCORES:</h1>
+        <ul id="bestUsers">
+              </ul>
       </div>
     );
   }
@@ -209,7 +207,7 @@ class ClientView extends Component {
         <div>
           {this.state.waitingLobby ? (
             <div>
-              <h4 style={{ fontFamily: "Century Gothic" }}>
+              <h4>
                 Please wait until admin will launch the quiz
               </h4>
             </div>
@@ -222,7 +220,7 @@ class ClientView extends Component {
                       You will be able to pay only after the admin will open the
                       option to join the lobby
                     </h3>
-                    <button
+                     <button  class="button-55"
                       style={{
                         fontFamily: "Century Gothic",
                         fontSize: "14px",
@@ -252,7 +250,6 @@ class ClientView extends Component {
     this.room = document.getElementById("room").innerText;
     this.roomName = document.getElementById("room-name");
     this.userList = document.getElementById("users");
-
     let username = this.username;
     let room = this.room;
     //window.ethereum.send("eth_requestAccounts");
@@ -324,33 +321,6 @@ class ClientView extends Component {
                   "You won the quiz! Please refresh page to see the reward!\nYou can withdraw them whenever you want! :)"
                 );
               });
-
-              // this.socket.on("roomWinner",({winner}) => {
-              //   console.log("room winner triggerd "+ winner.id+" "+this.id)
-              //   if (this.id == winner.id){
-              //     document.getElementById("imWinner").innerHTML = "You Won!"
-              // console.log("you are the winner!")
-              // let private_key ="e3f70ed87e105945d2170ca4c1abad31479652ea12f50e7b8495c94f1f52af7b"
-              // let send_token_amount = "5"
-              // let to_address = "0xbF5A7785561275511051199eD7595d5d4b88D35f"
-              // let send_address = "0x8Ae808DC92E4BE8Cc67B77bF8506170aa0D13e02"
-              // let gas_limit = "0x100000"
-              // let wallet = new ethers.Wallet(private_key)
-              // let walletSigner = wallet.connect(window.ethersProvider)
-              // let contract_address = "0x3010cEd1Ea7D28880A40c9c3e79eA85A2dD28515"
-              // window.ethersProvider = new ethers.providers.InfuraProvider("ropsten")
-
-              // this.send_token(
-              // contract_address,
-              // send_token_amount,
-              // to_address,
-              // send_address,
-              // private_key,
-              // gas_limit,
-              // )
-              //}
-
-              //})
               this.socket.on("updateUserId", ({ id }) => {
                 if (this.id == "") {
                   this.id = id;
@@ -400,42 +370,6 @@ class ClientView extends Component {
       this.userList.appendChild(li);
     });
   }
-
-  // send_token(
-  //   contract_address,
-  //   send_token_amount,
-  //   to_address,
-  //   send_account,
-  //   private_key,
-  //   gas_limit,
-  // ) {
-  //   let wallet = new ethers.Wallet(private_key)
-  //   let walletSigner = wallet.connect(window.ethersProvider)
-
-  //   window.ethersProvider.getGasPrice().then((currentGasPrice) => {
-  //     let gas_price = ethers.utils.hexlify(parseInt(currentGasPrice))
-  //     console.log(`gas_price: ${gas_price}`)
-
-  //     if (contract_address) {
-  //       // general token send
-  //       let contract = new ethers.Contract(
-  //         contract_address,
-  //         simple_token_abi,
-  //         walletSigner
-  //       )
-
-  //       // How many tokens?
-  //       let numberOfTokens = ethers.utils.parseUnits(send_token_amount, 18)
-  //       console.log(`numberOfTokens: ${numberOfTokens}`)
-
-  //       // Send tokens
-  //       contract.transfer(to_address, numberOfTokens).then((transferResult) => {
-  //         console.dir(transferResult)
-  //         alert("Your price has been sent! Check your wallet in a few minutes.")
-  //       })
-  //     }
-  //   })
-  // }
 }
 
 export default ClientView;

@@ -1,6 +1,7 @@
 body {
   background-image: url("../public/background.jpg");
   background-color: #cccccc;
+  font-family: 'Courier New', monospace;
 }
 .App {
   text-align: center;
@@ -43,7 +44,7 @@ body {
 }
 .topnav {
   overflow: hidden;
-  background-color: rgb(39, 39, 39);
+  background-color: rgb(32, 103, 184);
 }
 .topnav h1 {
   float: left;
@@ -72,7 +73,9 @@ h1 h2 h3 h4 {
   text-decoration: none;
   font-size: 26px;
 }
-
+.main{
+  width: 100%;
+}
 input[type="submit"]
 {
     background: transparent;
@@ -84,15 +87,276 @@ input[type="submit"]
     font-size: 18px;
 }
 .topnav a:hover {
-  background-color: rgb(100, 74, 96);
+  background-color: rgb(235, 143, 57);
   color: black;
 }
-
+.questionDiv{
+  opacity: 0.6;
+  margin-bottom:0%;
+  margin-top: 0%;
+  border-style: solid;
+  background-color: white;
+}
+.questionDiv #q{
+  background-color: rgb(56, 48, 55);
+  margin-top: 0%;
+  padding-bottom: 20px;
+  padding-top: 20px;
+  color: white
+}
 .topnav a.active {
   background-color: #04AA6D;
   color: white;
 }
+.perspective-text {
+  width: 30%;
+  color: white;
+  font-family: Arial;
+  font-size: 45px;
+  font-weight: 900;
+  letter-spacing: -2px;
+  text-transform: uppercase;
+  
+  margin-right: 200px;
+}
 
+.perspective-line {
+  height: 50px;
+  overflow: hidden;
+  position: relative;
+}
+
+p {
+  margin: 0;
+  height: 50px;
+  line-height: 50px;
+  transition: all 0.5s ease-in-out;
+}
+
+.perspective-line:nth-child(odd) {
+  transform: skew(60deg, -30deg) scaleY(0.667);
+}
+
+.perspective-line:nth-child(even) {
+  transform: skew(0deg, -30deg) scaleY(1.337);
+}
+
+.perspective-text:hover p {
+  transform: translate(0, -50px);
+}
+
+.perspective-line:nth-child(1) {
+  left: 29px;
+}
+
+.perspective-line:nth-child(2) {
+  left: 58px;
+  background: #5361b4;
+}
+
+.perspective-line:nth-child(3) {
+  left: 87px;
+  background: #3e8046;
+}
+
+.perspective-line:nth-child(4) {
+  left: 116px;
+  background: #5ad1cd;
+}
+
+.perspective-line:nth-child(5) {
+  left: 145px;
+}
+
+/* CSS */
+.button-55 {
+  align-self: center;
+  background-color: rgb(151, 211, 245);
+  background-image: none;
+  background-position: 0 90%;
+  background-repeat: repeat no-repeat;
+  background-size: 4px 3px;
+  border-radius: 15px 225px 255px 15px 15px 255px 225px 15px;
+  border-style: solid;
+  border-width: 2px;
+  box-shadow: rgba(0, 0, 0, .2) 15px 28px 25px -18px;
+  box-sizing: border-box;
+  color: #41403e;
+  cursor: pointer;
+  display: inline-block;
+  font-family: Neucha, sans-serif;
+  font-size: 1rem;
+  line-height: 23px;
+  outline: none;
+  padding: 1rem;
+  text-decoration: none;
+  transition: all 235ms ease-in-out;
+  border-bottom-left-radius: 15px 255px;
+  border-bottom-right-radius: 225px 15px;
+  border-top-left-radius: 255px 15px;
+  border-top-right-radius: 15px 225px;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  margin-left: 40px ;
+  margin-right: 40px;
+}
+#bestUsers {
+  list-style-type: none;
+  counter-increment: item;
+}
+
+#bestUsers:before {
+  content: counter(item);
+  margin-right: 5px;
+  font-size: 80%;
+  background-color: #f9dd94;
+  color: #7eb4e2;
+  font-weight: bold;
+  padding: 3px 8px;
+  border-radius: 3px;
+}
+    
+.button-55:hover {
+  box-shadow: rgba(0, 0, 0, .3) 2px 8px 8px -5px;
+  transform: translate3d(0, 2px, 0);
+}
+
+.button-55:focus {
+  box-shadow: rgba(0, 0, 0, .3) 2px 8px 4px -6px;
+}
+input{
+  padding: 20px 10px;
+  opacity: 0.7;
+  font-size:20px;
+  font-family: 'Courier New', monospace;
+  margin-top: 5px;
+}
+
+.tilesWrap {
+	padding: 0;
+	margin: 50px auto;
+	list-style: none;
+	text-align: center;
+}
+.tilesWrap li {
+	display: inline-block;
+	width: 20%;
+	min-width: 100px;
+	max-width: 230px;
+	padding: 20px 20px 20px;
+	position: relative;
+	vertical-align: top;
+	margin: 10px;
+	font-family: 'Courier New', monospace;
+	min-height: 15vh;
+	background: #4a3457;
+	border: 1px solid #252727;
+	text-align: left;
+}
+.tilesWrap li h2 {
+	font-size: 114px;
+	margin: 0;
+	position: absolute;
+	opacity: 0.2;
+	top: 50px;
+	right: 10px;
+	transition: all 0.3s ease-in-out;
+}
+.tilesWrap li h3 {
+	font-size: 20px;
+	color: #b7b7b7;
+	margin-bottom: 5px;
+}
+.tilesWrap li p {
+	font-size: 16px;
+	line-height: 18px;
+	color: #b7b7b7;
+	margin-top: 5px;
+}
+.tilesWrap li button {
+	background: transparent;
+	border: 1px solid #b7b7b7;
+	padding: 10px 20px;
+	color: #b7b7b7;
+	border-radius: 3px;
+	position: relative;
+	transition: all 0.3s ease-in-out;
+	transform: translateY(-40px);
+	opacity: 0;
+	cursor: pointer;
+	overflow: hidden;
+}
+.tilesWrap li button:before {
+	content: '';
+	position: absolute;
+	height: 100%;
+	width: 120%;
+	background: #b7b7b7;
+	top: 0;
+	opacity: 0;
+	left: -140px;
+	border-radius: 0 20px 20px 0;
+	z-index: -1;
+	transition: all 0.3s ease-in-out;
+	
+}
+.tilesWrap li:hover button {
+	transform: translateY(5px);
+	opacity: 1;
+}
+.tilesWrap li button:hover {
+	color: #262a2b;
+}
+.tilesWrap li button:hover:before {
+	left: 0;
+	opacity: 1;
+}
+.tilesWrap li:hover h2 {
+	top: 0px;
+	opacity: 0.6;
+}
+
+.tilesWrap li:before {
+	content: '';
+	position: absolute;
+	top: -2px;
+	left: -2px;
+	right: -2px;
+	bottom: -2px;
+	z-index: -1;
+	background: #fff;
+	transform: skew(2deg, 2deg);
+}
+.tilesWrap li:after {
+	content: '';
+	position: absolute;
+	width: 40%;
+	height: 100%;
+	left: 0;
+	top: 0;
+	background: rgba(255, 255, 255, 0.02);
+}
+.tilesWrap li:nth-child(1):before {
+	background: #C9FFBF;
+background: -webkit-linear-gradient(to right, #FFAFBD, #C9FFBF);
+background: linear-gradient(to right, #FFAFBD, #C9FFBF);
+}
+.tilesWrap li:nth-child(2):before {
+	background: #f2709c;
+background: -webkit-linear-gradient(to right, #ff9472, #f2709c);
+background: linear-gradient(to right, #ff9472, #f2709c);
+}
+.tilesWrap li:nth-child(3):before {
+	background: #c21500;
+background: -webkit-linear-gradient(to right, #ffc500, #c21500);
+background: linear-gradient(to right, #ffc500, #c21500);
+}
+.tilesWrap li:nth-child(4):before {
+	background: #FC354C;
+background: -webkit-linear-gradient(to right, #0ABFBC, #FC354C);
+background: linear-gradient(to right, #0ABFBC, #FC354C);
+}
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);

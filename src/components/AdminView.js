@@ -21,16 +21,17 @@ class AdminView extends Component {
       <>
      
         <div>
-          <h3 style={{fontFamily:"Century Gothic"}}>Username:</h3>
+          <h3>Username:</h3>
           <h4 id="username">{this.props.dataFromParent.userName}</h4>
-          <h3 style={{fontFamily:"Century Gothic"}}>Quiz ID:</h3>
+          <h3>Quiz ID:</h3>
           <h4 id="room">{this.props.dataFromParent.room}</h4>
+          <h3>Users in quiz:</h3>
           <ul id="users"></ul>
           <h1 id="timer"></h1>
           {this.state.waitingLobby ? (
             <div>
               <form onSubmit={this.launchQuiz}>
-                <button style={{fontFamily:"Century Gothic",fontSize:"14px" , backgroundColor:"linen",borderRadius:"14px", borderColor:"tan",color:"black", padding:"8px"}} type="submit" value="launch quiz" id="submit">Launch quiz</button> 
+                 <button  class="button-55"  type="submit" value="launch quiz" id="submit">Launch quiz</button> 
               </form>
             </div>
           ) : (
@@ -40,7 +41,7 @@ class AdminView extends Component {
                   <div>
                     {this.state.viewTimerEnded
                       ? (
-                        this.state.quizEnded ? <div> <h1 style={{fontFamily:"Century Gothic"}}> Quiz Ended </h1></div>
+                        this.state.quizEnded ? <div> <h1> Quiz Ended </h1></div>
                        :
                       this.renderNewQuestion())
                       : null}
@@ -51,28 +52,22 @@ class AdminView extends Component {
               </div>
 
               {this.state.viewTimerEnded ? <div>
-                <h1 style={{fontFamily:"Century Gothic"}}>BEST SCORES:</h1>
-                <h2 id="p1"></h2>
-                <br></br>
-                <h2 id="p2"></h2>
-                <br></br>
-                <h2 id="p3"></h2>
+                <h1>BEST SCORES:</h1>
+                <ul id="bestUsers"></ul>
                 </div> : null}
-              {/* //<h5> seconds left: </h5> */}
             </div>
           )}
           <div>
             <h3 id="titlaDiv"></h3>
             <br></br>
+            <div id="questionDiv" class="questionDiv" hidden="true">
             <h2 id="q"></h2>
-            <br></br>
             <h2 id="a1"></h2>
-            <br></br>
             <h2 id="a2"></h2>
-            <br></br>
             <h2 id="a3"></h2>
-            <br></br>
             <h2 id="a4"></h2>
+
+            </div>
             <br></br>
           </div>
         </div>
@@ -96,14 +91,15 @@ class AdminView extends Component {
     this.socket.emit("startQuizInRoom", { username, room });
 
     this.socket.on("roomUsers", ({ room, users }) => {
-      console.log("admin - inside socket on room users")
-      //this.outputRoomName(room);
       this.outputUsers(users);
     });
     this.socket.on("BestUsersList", ({ room, bestUsers }) => {
-      for (var i=0 ; i<bestUsers.length ; i++) {
-        document.getElementById("p"+(i+1)).innerHTML = (i+1) +")"+ bestUsers[i].username + " Score: " + bestUsers[i].score;
-      }
+      for (var i = 0; i < bestUsers.length; i++) {
+        let bestUsersList = document.getElementById("bestUsers");
+        const li = document.createElement("li");
+        li.innerText = bestUsers[i].username + " Score: " +bestUsers[i].score;
+        bestUsersList.appendChild(li);
+    }
     });
     this.socket.on("renderNextQuestionForRoom", ({ room, currQ }) => {
       this.setState({ 
@@ -162,6 +158,7 @@ class AdminView extends Component {
 
   launchQuiz = (event) => {
     event.preventDefault();
+    document.getElementById("questionDiv").hidden =false
     this.setState({ waitingLobby: false });
     this.nextQuestion(event);
   };
@@ -171,7 +168,7 @@ class AdminView extends Component {
       
       <div>
         <form onSubmit={this.nextQuestion}>
-          <button style={{fontFamily:"Century Gothic",fontSize:"16px",backgroundColor:"linen", borderRadius:"14px",borderColor:"tan", padding:"15px",color:"black", margin:"13px"}} type="submit" value="nextQuestion" id="nextQuestion" >Next question</button>
+           <button  class="button-55" >Next question</button>
         </form>
       </div>
       
@@ -192,14 +189,13 @@ class AdminView extends Component {
   }
 
   startQuiz() {
-    console.log("start quiz func");
     return (
       <div>
         <h2 id="room-name"></h2>
         <ul id="users"></ul>
         <div>
           <form onSubmit={this.askToPayAndStartSockets}>
-            <button style={{fontFamily:"Century Gothic",fontSize:"14px" , backgroundColor:"linen",borderRadius:"14px", borderColor:"tan",color:"black", padding:"8px"}} type="submit" value="Start Quiz" id="startQuiz" >Start Quiz</button>
+             <button  class="button-55"  type="submit" value="Start Quiz" id="startQuiz" >Start Quiz</button>
           </form>
         </div>
       </div>
@@ -207,7 +203,6 @@ class AdminView extends Component {
   }
 
   nextQuestion = (event) => {
-    console.log("nextQuestion func");
     event.preventDefault();
     this.username = document.getElementById("username").innerText;
     this.room = document.getElementById("room").innerText;
@@ -216,7 +211,14 @@ class AdminView extends Component {
     this.socket.emit("quizInProgress", { username, room });
     let currQ = this.state.currQuestion + 1;
     this.socket.emit("nextQuestion", { currQ, room });
+    let correct = this.quiz.questions[currQ].c[1]
 
+    
+    document.getElementById("a1").style.backgroundColor = "white";
+    document.getElementById("a2").style.backgroundColor = "white";
+    document.getElementById("a3").style.backgroundColor = "white";
+    document.getElementById("a4").style.backgroundColor = "white";
+    document.getElementById("a"+correct).style.backgroundColor = "green"
     let next = parseInt(this.state.currQuestion) + 1;
     this.setState({ currQuestion: next });
   };

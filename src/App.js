@@ -132,68 +132,102 @@ class App extends Component {
           <a>
             &nbsp; BlockChain Trivia
           </a>
-            <b className="nav-item text-nowrap d-none d-sm-none d-sm-block">
-              <small className="text-muted"><span id="account">{this.state.account}</span></small>
-            </b>
-            <b>Rewards : {this.state.coins} KMC</b>
-            <a>
+          <b className="nav-item text-nowrap d-none d-sm-none d-sm-block">
+            <small className="text-muted"><span id="account">{this.state.account}</span></small>
+          </b>
+          <b>Rewards : {this.state.coins} KMC</b>
+          <a>
             <form onSubmit={this.loadBlockchainData}>
-              <input  type="submit" value="Connect Wallet" />
+              <input type="submit" value="Connect Wallet" />
             </form>
-            </a>
-            <a>
+          </a>
+          <a>
             <form onSubmit={this.withdrawRewards}>
               <input type="submit" id="withdraw" value="Withdraw Rewards" />
             </form>
-            </a>
+          </a>
         </nav>
         <div id="floattingBox">
-         
-        {this.state.createQuiz || this.state.enterQuiz ? (
-          this.state.createQuiz ? (
-            <div>
-              <PostForm />
-            </div>
-          ) : (
-            <Quiz />
-          )
-        ) : (
-          <div>
-            <br></br><br></br><br></br>
-            <h1 style={{fontFamily:"Century Gothic"}}> Welcome to the Blockchaine Trivia game! </h1>
-            <h2 style={{fontFamily:"Century Gothic"}}> Please select one of the options below </h2>
-            <button onClick={() => this.enterExistingQuiz()} style={{fontFamily:"Century Gothic",fontSize:"16px",backgroundColor:"linen", borderRadius:"14px",borderColor:"tan", padding:"15px", margin:"13px"}}>Enter Quiz</button>
-            <button onClick={() => this.createNewQuiz()} style={{fontFamily:"Century Gothic",fontSize:"16px" , backgroundColor:"linen",borderRadius:"14px", borderColor:"tan", padding:"15px", margin:"13px"}}>Create Quiz</button>
-            <br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br>
-          </div>
-        )}
 
-        {/* <PostList /> */}
-        <h3 style={{fontFamily:"Century Gothic"}}>By Karen Rachev & Meirav Goihman</h3>
-      </div>
+          {this.state.createQuiz || this.state.enterQuiz ? (
+            this.state.createQuiz ? (
+              <div>
+                <PostForm />
+              </div>
+            ) : (
+              <Quiz />
+            )
+          ) : (
+            <div>
+
+              <div class="perspective-text">
+                <div class="perspective-line">
+                  <p></p>
+                  <p>Welcome</p>
+                </div>
+                <div class="perspective-line">
+                  <p>Welcome</p>
+                  <p>To The KMC</p>
+                </div>
+                <div class="perspective-line">
+                  <p>To The KMC</p>
+                  <p>Blochchain</p>
+                </div>
+                <div class="perspective-line">
+                  <p>Blockchain</p>
+                  <p>Trivia Game</p>
+                </div>
+                <div class="perspective-line">
+                  <p>Trivia Game</p>
+                  <p></p>
+                </div>
+              </div>
+              <div>
+                <ul class="tilesWrap">
+                  <li>
+                    <h2>01</h2>
+                    <h3>Build your custom quiz.</h3>
+                    <p>By pressing on the "create quiz" button bellow, you can build your own cutsom quiz.</p>
+                  </li>
+                  <li>
+                    <h2>02</h2>
+                    <h3>Play a quiz.</h3>
+                    <p>If you have an id of an existing quiz, press on the "start quiz" button and start playing with your friends!</p>
+                  </li>
+                  <li>
+                    <h2>03</h2>
+                    <h3>Earn KMC</h3>
+                    <p>Blockchain Trivia KMC is fun way of studying and earning!</p>
+                  </li>
+                </ul>
+              </div>
+              <div class="main">
+                <h2 > Please select one of the options below </h2>
+                <button class="button-55" onClick={() => this.enterExistingQuiz()} >Enter Quiz</button>
+                <button class="button-55" onClick={() => this.createNewQuiz()} >Create Quiz</button>
+
+              </div>
+            </div>
+          )}
+
+          {/* <PostList /> */}
+          <h3>By Karen Rachev & Meirav Goihman</h3>
+        </div>
       </div>
     );
   }
   enterExistingQuiz() {
-    console.log("Click happened enterExistingQuiz");
-    //event.preventDefault();
-    if(this.state.account == "0x0"){
+    if (this.state.account == "0x0") {
       alert("Please connect your MetaMask wallet!")
     }
-    else{
+    else {
       this.setState({ enterQuiz: true });
     }
-    
+
   }
 
   createNewQuiz() {
-    console.log("Click happened createNewQuiz");
-    //event.preventDefault();
     this.setState({ createQuiz: true });
   }
 }
-//<button onclick={this.setState({createQuiz : true})}>Create Quiz</button>
-//<button onclick={this.setState({enterQuiz : true})}>Enter Quiz</button>
-//<button onclick={(e) => this.enterExistingQuiz(e)}>Enter Quiz</button>
-//<button onclick={(e) => this.createNewQuiz(e)}>Create Quiz</button>
 export default App;

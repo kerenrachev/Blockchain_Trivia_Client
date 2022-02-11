@@ -21,13 +21,6 @@ class Quiz extends Component {
       },
     };
   }
-  /*
-  componentDidMount() {
-    const scrSockets = document.createElement("script");
-    scrSockets.src = "http://localhost:3001/socket.io/socket.io.js";
-    document.body.appendChild(scrSockets);
-  }*/
-
   render() {
     console.log(this.state.data)
     return (
@@ -43,9 +36,9 @@ class Quiz extends Component {
         <div class="form-control">
           <br></br>
           <br></br>
-          <h3 style={{fontFamily:"Century Gothic"}}>Please enter your user name and the id of the quiz you want to enter.</h3>
-          <h3 style={{fontFamily:"Century Gothic"}}>If you want to enter as admin, check the option box and fill in the password.</h3>
-          <label for="username" style={{fontFamily:"Century Gothic"}}>Username: &ensp;</label>
+          <h3>Please enter your user name and the id of the quiz you want to enter.</h3>
+          <h3>If you want to enter as admin, check the option box and fill in the password.</h3>
+          <label for="username">Username: &ensp;</label>
           <input
             type="text"
             name="username"
@@ -56,17 +49,17 @@ class Quiz extends Component {
         </div>
         <br></br>
         <div class="form-control">
-          <label for="room" style={{fontFamily:"Century Gothic"}}>Quiz ID: &ensp;</label>
+          <label for="room">Quiz ID: &ensp;</label>
           <input name="room" id="room" placeholder="Enter id..."></input>
         </div>
         <br></br>
         <div class="form-control">
         <input type="checkbox" id="admin" name="admin" onChange={this.checkboxClicked}></input>
-        {this.state.showComponent ? null : <label for="admin" style={{fontFamily:"Century Gothic"}}>enter as Admin</label>}
+        {this.state.showComponent ? null : <label for="admin">enter as Admin</label>}
         {this.state.showComponent ? <input type="text" name="password" id="password" placeholder="Enter password..."required/> : null}
         </div>
         <br></br>
-        <button type="submit" class="btn" style={{fontFamily:"Century Gothic",fontSize:"14px" , backgroundColor:"linen",borderRadius:"14px", borderColor:"tan", padding:"8px"}}>
+        <button  class="button-55"  type="submit">
           Start quiz
         </button>
         <h4 id="incorrectPass"> </h4>
