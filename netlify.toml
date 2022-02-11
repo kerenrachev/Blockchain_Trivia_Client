@@ -8,7 +8,10 @@ to = "https://kmcblockchain.herokuapp.com/quiz"
 
 [[redirects]]
 from = "/posts/"
-to = "https://kmcblockchain.herokuapp.com/posts/"
+to = "https://kmcblockchain.herokuapp.com/posts/:splat"
+status = 200
+force = true
+headers = { X-From = "Netlify", X-Forwarded-Host = "ejecafetero.fincaraiz.com.co" }
 
 [[redirects]]
 from = "/initiateAccountInDB"
