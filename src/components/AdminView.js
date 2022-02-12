@@ -113,7 +113,7 @@ class AdminView extends Component {
       this.setState({ 
         viewTimerEnded: false,
       })
-      let timeForQue = 2;
+      let timeForQue = 40;
       let seconds = timeForQue;
       document.getElementById("timer").innerHTML = seconds;
       this.timerIntervalFunc = setInterval(this.timeInterval, 1000);
