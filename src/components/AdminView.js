@@ -166,6 +166,7 @@ class AdminView extends Component {
 
   launchQuiz = (event) => {
     event.preventDefault();
+    this.socket.emit("quizInProgress", { username, room });
     document.getElementById("questionDiv").hidden =false
     this.setState({ waitingLobby: false });
     this.nextQuestion(event);
@@ -218,7 +219,7 @@ class AdminView extends Component {
     this.room = document.getElementById("room").innerText;
     let username = this.username;
     let room = this.room;
-    this.socket.emit("quizInProgress", { username, room });
+    //this.socket.emit("quizInProgress", { username, room });
     let currQ = this.state.currQuestion + 1;
     this.socket.emit("nextQuestion", { currQ, room });
     let correct = this.quiz.questions[currQ].c[1]
