@@ -166,6 +166,10 @@ class AdminView extends Component {
 
   launchQuiz = (event) => {
     event.preventDefault();
+    this.username = document.getElementById("username").innerText;
+    this.room = document.getElementById("room").innerText;
+    let username = this.username;
+    let room = this.room;
     this.socket.emit("quizInProgress", { username, room });
     document.getElementById("questionDiv").hidden =false
     this.setState({ waitingLobby: false });
