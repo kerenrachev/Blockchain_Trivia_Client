@@ -171,7 +171,7 @@ class App extends Component {
                 </div>
                 <div class="perspective-line">
                   <p>To The KMC</p>
-                  <p>Blochchain</p>
+                  <p>Blockchain</p>
                 </div>
                 <div class="perspective-line">
                   <p>Blockchain</p>
@@ -192,12 +192,12 @@ class App extends Component {
                   <li>
                     <h2>02</h2>
                     <h3>Play a quiz.</h3>
-                    <p>If you have an id of an existing quiz, press on the "start quiz" button and start playing with your friends!</p>
+                    <p>Press on the "start quiz" button and start playing with your friends!</p>
                   </li>
                   <li>
                     <h2>03</h2>
                     <h3>Earn KMC</h3>
-                    <p>Blockchain Trivia KMC is fun way of studying and earning!</p>
+                    <p>Blockchain Trivia KMC is fun way of studying and EARNING KMC!</p>
                   </li>
                 </ul>
               </div>

@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import { ethers } from "ethers";
 import simple_token_abi from "./Contracts/simple_token_abi.json";
+import timerIcon from '../images/timer.png'
 const io = require("socket.io-client");
 
-//change class to className
-//change for to htmlFor
+
 class ClientView extends Component {
   constructor(props) {
     super(props);
@@ -43,6 +43,7 @@ class ClientView extends Component {
           const li = document.createElement("li");
           li.innerText = bestUsers[i].username + " Score: " +bestUsers[i].score;
           bestUsersList.appendChild(li);
+          
       }
     });
   }
@@ -61,8 +62,14 @@ class ClientView extends Component {
           <h3>Quiz ID:</h3>
           <h4 id="room">{this.props.dataFromParent.room}</h4>
           <h3>Users in quiz:</h3>
-          <ul id="users"></ul>
+          <section id="boxes">
+            <div id="userList" class="container"></div>
+          </section>
+          <div id="mainTimerDiv">
           <h1 id="timer"></h1>
+          <img id="timerIcon" src={timerIcon} style={{display: "none"}}/>
+          
+          </div>
           {this.state.viewTimerEnded ? (
             <div>
               {this.state.quizEnded ? (
@@ -79,6 +86,7 @@ class ClientView extends Component {
               {this.state.questionsDisabled ? null : (
                 <div>
                  <h3 id="titlaDiv"></h3>
+                 <br></br>
                 <div class= "questionDiv">
                   {/* <h5> seconds left: </h5> */}
 
@@ -153,7 +161,7 @@ class ClientView extends Component {
         break;
       }
     }
-    document.getElementById("submitAnswer").hidden = true;
+    document.getElementById("submitAnswer").style.display = "none";
     if (answer === this.quiz.questions[this.state.currQuestion].c) {
       let timeLeft = document.getElementById("timer").innerHTML;
       score = 10 * timeLeft;
@@ -272,6 +280,7 @@ class ClientView extends Component {
               let address = addressResult;
               this.socket.emit("joinRoom", { username, room, address });
               this.socket.on("renderNextQuestionForRoom", ({ room, currQ }) => {
+                document.getElementById("timerIcon").style.display = "block"
                 this.wasIRight = false;
                 this.lastScore = 0;
 
@@ -286,7 +295,7 @@ class ClientView extends Component {
                   viewTimerEnded: false,
                   currQuestion: currQ,
                 });
-                let timeForQue = 4;
+                let timeForQue = 40;
                 let seconds = timeForQue;
                 document.getElementById("timer").innerHTML = seconds;
                 this.timerIntervalFunc = setInterval(this.timeInterval, 1000);
@@ -354,11 +363,14 @@ class ClientView extends Component {
   }
 
   outputUsers(users) {
-    this.userList.innerHTML = "";
+    let usersList = document.getElementById("userList");
+    usersList.innerHTML = "";
     users.forEach((user) => {
-      const li = document.createElement("li");
-      li.innerText = user.username;
-      this.userList.appendChild(li);
+      
+      const box = document.createElement("button");
+      box.className= "box"
+      box.innerHTML = user.username;
+      usersList.appendChild(box);
     });
   }
 }

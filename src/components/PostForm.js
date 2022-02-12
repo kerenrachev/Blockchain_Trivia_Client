@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import axios from 'axios'
-import mainimg from '../images/mainpic.png'
+
 
 class PostForm extends Component {
     constructor(props) {
@@ -62,7 +62,6 @@ class PostForm extends Component {
             <div>
                 {this.state.quizID ? <h4>{this.state.quizID}</h4> :
                     <div >
-                        <img src={mainimg} />
                         <form onSubmit={this.submitHandler} >
                             <h2>Yay! Lets build a new quiz</h2>
                             <p id="para" >please enter the amount needed for entering this quiz</p>

@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import timerIcon from '../images/timer.png'
 const io = require("socket.io-client");
 
 class AdminView extends Component {
@@ -26,8 +27,14 @@ class AdminView extends Component {
           <h3>Quiz ID:</h3>
           <h4 id="room">{this.props.dataFromParent.room}</h4>
           <h3>Users in quiz:</h3>
-          <ul id="users"></ul>
+          <section id="boxes">
+            <div id="userList" class="container"></div>
+          </section>
+          <div id="mainTimerDiv">
           <h1 id="timer"></h1>
+          <img id="timerIcon" src={timerIcon} style={{display: "none"}}/>
+          
+          </div>
           {this.state.waitingLobby ? (
             <div>
               <form onSubmit={this.launchQuiz}>
@@ -102,10 +109,11 @@ class AdminView extends Component {
     }
     });
     this.socket.on("renderNextQuestionForRoom", ({ room, currQ }) => {
+      document.getElementById("timerIcon").style.display = "block"
       this.setState({ 
         viewTimerEnded: false,
       })
-      let timeForQue = 4;
+      let timeForQue = 40;
       let seconds = timeForQue;
       document.getElementById("timer").innerHTML = seconds;
       this.timerIntervalFunc = setInterval(this.timeInterval, 1000);
@@ -180,11 +188,13 @@ class AdminView extends Component {
   }
 
   outputUsers(users) {
-    this.userList.innerHTML = "";
+    let usersList = document.getElementById("userList");
+    usersList.innerHTML = "";
     users.forEach((user) => {
-      const li = document.createElement("li");
-      li.innerText = user.username;
-      this.userList.appendChild(li);
+      const box = document.createElement("button");
+      box.className= "box"
+      box.innerHTML = user.username
+      usersList.appendChild(box);
     });
   }
 
@@ -195,7 +205,7 @@ class AdminView extends Component {
         <ul id="users"></ul>
         <div>
           <form onSubmit={this.askToPayAndStartSockets}>
-             <button  class="button-55"  type="submit" value="Start Quiz" id="startQuiz" >Start Quiz</button>
+             <button  class="button-55"  type="submit" value="Start Quiz" id="startQuiz" >Open Lobby</button>
           </form>
         </div>
       </div>

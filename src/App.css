@@ -90,10 +90,47 @@ input[type="submit"]
   background-color: rgb(235, 143, 57);
   color: black;
 }
+#boxes{
+  margin-top:20px;
+  
+}
+.container{
+  width:80%;
+  margin:auto;
+  overflow:hidden;
+}
+#titlaDiv{
+  float: left;
+  margin-left: 20px;
+}
+#mainTimerDiv{
+  width:100%;
+}
+#timerIcon{
+  float:right
+}
+#timer{
+  float: right
+}
+#boxes .box{
+  background: rgb(224, 211, 232);
+  float:left;
+  text-align: center;
+  font-size: 17px;
+  font-family: 'Assistant', sans-serif;
+  width:30%;
+  padding:10px;
+  height: 30px;
+  margin: 10px;
+  outline: none;
+  border-width: 0;
+  border-radius: 2em;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.7);
+}
 .questionDiv{
   opacity: 0.6;
   margin-bottom:0%;
-  margin-top: 0%;
+  margin-top: 50px;
   border-style: solid;
   background-color: white;
 }
@@ -109,15 +146,13 @@ input[type="submit"]
   color: white;
 }
 .perspective-text {
-  width: 30%;
+  width:70%;
   color: white;
   font-family: Arial;
-  font-size: 45px;
+  font-size: 150%;
   font-weight: 900;
   letter-spacing: -2px;
   text-transform: uppercase;
-  
-  margin-right: 200px;
 }
 
 .perspective-line {
@@ -134,11 +169,11 @@ p {
 }
 
 .perspective-line:nth-child(odd) {
-  transform: skew(60deg, -30deg) scaleY(0.667);
+  transform: skew(60deg, -10deg) scaleY(0.667);
 }
 
 .perspective-line:nth-child(even) {
-  transform: skew(0deg, -30deg) scaleY(1.337);
+  transform: skew(0deg, -10deg) scaleY(1.337);
 }
 
 .perspective-text:hover p {
@@ -249,7 +284,8 @@ input{
 	vertical-align: top;
 	margin: 10px;
 	font-family: 'Courier New', monospace;
-	min-height: 15vh;
+	min-height: 20vh;
+  max-height: 35vh;
 	background: #4a3457;
 	border: 1px solid #252727;
 	text-align: left;
