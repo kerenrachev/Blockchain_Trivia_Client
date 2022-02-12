@@ -5,7 +5,7 @@ import PostForm from "./components/PostForm";
 import Quiz from "./components/Quiz";
 import axios from "axios";
 import simple_token_abi from './components/Contracts/simple_token_abi.json'
-
+import cashingSound from './sounds/cashing.mp3'
 const {
   Bank_Address,
   Private_Key_Bank,
@@ -14,7 +14,7 @@ const {
 class App extends Component {
   constructor(props) {
     super(props);
-
+    this.cashingSound = new Audio(cashingSound)
     this.state = {
       createQuiz: undefined,
       enterQuiz: undefined,
@@ -96,6 +96,7 @@ class App extends Component {
     else if (this.state.coins == 0 || this.state.coins == "-") {
       alert("Sorry, you have nothing to withdraw. Maybe try to earn some by playing a quiz? :)")
     } else {
+      this.cashingSound.play()
       this.setState({ coins: 0 })
       document.getElementById("withdraw").disabled = true
       let send_token_amount = this.state.coins.toString()
