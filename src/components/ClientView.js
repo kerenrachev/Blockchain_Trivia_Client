@@ -2,12 +2,14 @@ import React, { Component } from "react";
 import { ethers } from "ethers";
 import simple_token_abi from "./Contracts/simple_token_abi.json";
 import timerIcon from '../images/timer.png'
+import cheeringSound from '../sounds/cheering.wav'
 const io = require("socket.io-client");
 
 
 class ClientView extends Component {
   constructor(props) {
     super(props);
+    this.cheeringSound = new Audio(cheeringSound)
     this.socket =  io('https://kmcblockchain.herokuapp.com/')
     this.id = "";
     this.quiz = this.props.dataFromParent.quiz.data;
@@ -179,6 +181,7 @@ class ClientView extends Component {
     let str = "";
     let score = 0;
     if (this.wasIRight) {
+      this.cheeringSound.play()
       str = "You are right!!";
       score = this.lastScore;
     } else {
