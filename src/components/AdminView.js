@@ -94,8 +94,9 @@ class AdminView extends Component {
     let username = this.username;
     let room = this.room;
     let address = "garbageAddress";
+    let amount = this.quiz.amount
     this.socket.emit("joinRoom", { username, room, address });
-    this.socket.emit("startQuizInRoom", { username, room });
+    this.socket.emit("startQuizInRoom", { username, room, amount});
 
     this.socket.on("roomUsers", ({ room, users }) => {
       this.outputUsers(users);
@@ -170,7 +171,8 @@ class AdminView extends Component {
     this.room = document.getElementById("room").innerText;
     let username = this.username;
     let room = this.room;
-    this.socket.emit("quizInProgress", { username, room });
+    let amount = this.quiz.amount
+    this.socket.emit("quizInProgress", { username, room, amount });
     document.getElementById("questionDiv").hidden =false
     this.setState({ waitingLobby: false });
     this.nextQuestion(event);
