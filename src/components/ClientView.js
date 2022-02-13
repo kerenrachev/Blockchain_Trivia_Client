@@ -38,6 +38,7 @@ class ClientView extends Component {
       console.log("You can enter");
       //alert("Quiz not started by admin, please try again later")
       document.getElementById("payCoinsButton").style.display = "initial";
+      document.getElementById("paybuttonMassage").style.display = "none";
     });
     this.socket.on("BestUsersList", ({ room, bestUsers }) => {
       for (var i = 0; i < bestUsers.length; i++) {
@@ -218,7 +219,7 @@ class ClientView extends Component {
               {this.state.quizInProg ? null : (
                 <div>
                   <form onSubmit={this.askToPayAndStartSockets}>
-                    <h3>
+                    <h3 id="paybuttonMassage">
                       You will be able to pay only after the admin will open the
                       option to join the lobby
                     </h3>
