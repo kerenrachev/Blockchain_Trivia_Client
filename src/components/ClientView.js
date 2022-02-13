@@ -37,7 +37,7 @@ class ClientView extends Component {
     this.socket.on("QuizStarted", ({ room, users }) => {
       console.log("You can enter");
       //alert("Quiz not started by admin, please try again later")
-      document.getElementById("payCoinsButton").disabled = false;
+      document.getElementById("payCoinsButton").style.display = "block";
     });
     this.socket.on("BestUsersList", ({ room, bestUsers }) => {
       for (var i = 0; i < bestUsers.length; i++) {
@@ -235,7 +235,7 @@ class ClientView extends Component {
                       type="submit"
                       value="Pay"
                       id="payCoinsButton"
-                      disabled="disabled"
+                      style= {{display: "none"}}
                     >Pay {this.quiz.amount} KMC</button>
                   </form>
                 </div>
@@ -328,10 +328,9 @@ class ClientView extends Component {
                 if (this.id == "") {
                   this.id = id;
                 }
-                console.log("USer id updated! : " + this.id);
               });
               this.socket.on("adminLeft", ({ amount }) => {
-                alert("Oops! Admin has left the room, you will be charged back with " + amount + " KMC.\n Please refresh the page, and you will se the refund in the 'Rewards' section.")
+                alert("Oops! Admin has left the room, you will be charged back with " + amount + " KMC.\n You will see the refund in the 'Rewards' section.")
                 window.location.reload(false);
               });
               
