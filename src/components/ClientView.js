@@ -330,6 +330,11 @@ class ClientView extends Component {
                 }
                 console.log("USer id updated! : " + this.id);
               });
+              this.socket.on("adminLeft", ({ amount }) => {
+                alert("Oops! Admin has left the room, you will be charged back with " + amount + " KMC.\n Please refresh the page, and you will se the refund in the 'Rewards' section.")
+                window.location.reload(false);
+              });
+              
 
               console.log("after waiting lobby");
               this.setState({ waitingLobby: true });
