@@ -343,12 +343,11 @@ class ClientView extends Component {
           quizEnded: true,
         });
         setTimeout(function () {
-          if (newState == -1) {
             if(document.getElementById("imWinner").innerHTML != "You Won!") {
               alert('Sorry, you did not win.\nMaybe next time? :)');
               window.location.reload(false);
             }
-          }
+          
       }, 2000);
       }
     }
