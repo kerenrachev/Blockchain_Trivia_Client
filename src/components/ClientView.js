@@ -37,7 +37,7 @@ class ClientView extends Component {
     this.socket.on("QuizStarted", ({ room, users }) => {
       console.log("You can enter");
       //alert("Quiz not started by admin, please try again later")
-      document.getElementById("payCoinsButton").style.display = "block";
+      document.getElementById("payCoinsButton").style.display = "initial";
     });
     this.socket.on("BestUsersList", ({ room, bestUsers }) => {
       for (var i = 0; i < bestUsers.length; i++) {
