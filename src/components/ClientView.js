@@ -299,7 +299,7 @@ class ClientView extends Component {
                   viewTimerEnded: false,
                   currQuestion: currQ,
                 });
-                let timeForQue = 5;
+                let timeForQue = 40;
                 let seconds = timeForQue;
                 document.getElementById("timer").innerHTML = seconds;
                 this.timerIntervalFunc = setInterval(this.timeInterval, 1000);
