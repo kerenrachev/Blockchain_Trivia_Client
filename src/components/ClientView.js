@@ -284,7 +284,7 @@ class ClientView extends Component {
                   viewTimerEnded: false,
                   currQuestion: currQ,
                 });
-                let timeForQue = 5;
+                let timeForQue = 40;
                 let seconds = timeForQue;
                 document.getElementById("timer").innerHTML = seconds;
                 this.timerIntervalFunc = setInterval(this.timeInterval, 1000);
@@ -306,9 +306,8 @@ class ClientView extends Component {
               this.socket.on("roomWinner", ({ winner }) => {
                 document.getElementById("imWinner").innerHTML = "You Won!";
                 alert(
-                  "You won the quiz! \nYou can withdraw the reward whenever you want! :)"
+                  "You won the quiz! Please refresh page to see the reward!\nYou can withdraw them whenever you want! :)"
                 );
-                window.location.reload(false);
               });
               this.socket.on("updateUserId", ({ id }) => {
                 if (this.id == "") {
@@ -342,13 +341,6 @@ class ClientView extends Component {
         this.setState({
           quizEnded: true,
         });
-        setTimeout(function () {
-            if(document.getElementById("imWinner").innerHTML != "You Won!") {
-              alert('Sorry, you did not win.\nMaybe next time? :)');
-              window.location.reload(false);
-            }
-          
-      }, 2000);
       }
     }
   };
