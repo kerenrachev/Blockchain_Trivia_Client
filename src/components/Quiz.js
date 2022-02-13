@@ -22,7 +22,6 @@ class Quiz extends Component {
     };
   }
   render() {
-    console.log(this.state.data)
     return (
       
       <div>{this.state.admin ? <div> <AdminView dataFromParent={this.state.data} /> </div>: <div> {this.state.client ? <div><ClientView dataFromParent={this.state.data} /></div> : this.logToQuiz()} </div> } </div>
@@ -85,8 +84,6 @@ class Quiz extends Component {
     });
     if(document.getElementById("admin").checked) {
       let password = document.getElementById("password").value
-      console.log("pas1="+ password)
-      console.log("pas1="+ res.pass)
       if(password === res.data.pass){
         this.setState({
           quiz: res,

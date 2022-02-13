@@ -7,7 +7,6 @@ class AdminView extends Component {
     super(props);
     this.socket =  io('https://kmcblockchain.herokuapp.com/')
     this.quiz = this.props.dataFromParent.quiz.data;
-    //console.log("the quizzzz:"+this.quiz)
     this.state = {
       viewTimerEnded: false,
       waitingLobby: false,
@@ -17,7 +16,6 @@ class AdminView extends Component {
     };
   }
   render() {
-    console.log("quiz" + this.quiz);
     return (
       <>
      
@@ -114,7 +112,7 @@ class AdminView extends Component {
       this.setState({ 
         viewTimerEnded: false,
       })
-      let timeForQue = 40;
+      let timeForQue = 5;
       let seconds = timeForQue;
       document.getElementById("timer").innerHTML = seconds;
       this.timerIntervalFunc = setInterval(this.timeInterval, 1000);
@@ -143,7 +141,6 @@ class AdminView extends Component {
 
     let username = this.username;
     let room = this.room;
-    console.log(seconds);
     seconds = seconds - 1;
     document.getElementById("timer").innerHTML = seconds;
     if (seconds < 1) {

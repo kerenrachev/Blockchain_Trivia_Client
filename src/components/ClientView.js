@@ -29,14 +29,9 @@ class ClientView extends Component {
     this.room = document.getElementById("room").innerText;
     let username = this.username;
     let room = this.room;
-    console.log("before check");
     this.socket.emit("joinLobby", { username, room });
     this.socket.emit("CheckIfRoomOpened", { username, room });
-    console.log("after check");
-    console.log("componentDidMount");
     this.socket.on("QuizStarted", ({ room, users }) => {
-      console.log("You can enter");
-      //alert("Quiz not started by admin, please try again later")
       document.getElementById("payCoinsButton").style.display = "initial";
       document.getElementById("paybuttonMassage").style.display = "none";
     });
@@ -51,12 +46,6 @@ class ClientView extends Component {
     });
   }
   render() {
-    console.log(
-      "timer ended: " +
-        this.state.viewTimerEnded +
-        " QUIZ ENDED " +
-        this.state.quizEnded
-    );
     return (
       <>
         <div>
@@ -257,11 +246,9 @@ class ClientView extends Component {
     let room = this.room;
     //window.ethereum.send("eth_requestAccounts");
     if (window.ethereum) {
-      console.log(window.ethereum);
       window.ethereum
         .request({ method: "eth_requestAccounts" })
         .then((addressResult) => {
-          console.log("wallet address " + addressResult);
           let recieverAddress = "0x8Ae808DC92E4BE8Cc67B77bF8506170aa0D13e02";
           let transferAmount = ethers.utils.parseEther(
             this.quiz.amount.toString()
@@ -277,8 +264,6 @@ class ClientView extends Component {
             .transfer(recieverAddress, transferAmount)
             .then((result) => {
               this.socket.on("roomUsers", ({ room, users }) => {
-                //this.outputRoomName(room);
-                console.log("client - inside socket on room users");
                 this.outputUsers(users);
               });
               let address = addressResult;
@@ -299,7 +284,7 @@ class ClientView extends Component {
                   viewTimerEnded: false,
                   currQuestion: currQ,
                 });
-                let timeForQue = 40;
+                let timeForQue = 5;
                 let seconds = timeForQue;
                 document.getElementById("timer").innerHTML = seconds;
                 this.timerIntervalFunc = setInterval(this.timeInterval, 1000);
@@ -319,11 +304,11 @@ class ClientView extends Component {
               });
 
               this.socket.on("roomWinner", ({ winner }) => {
-                //console.log("room winner triggerd "+ winner.id+" "+this.id)
                 document.getElementById("imWinner").innerHTML = "You Won!";
                 alert(
-                  "You won the quiz! Please refresh page to see the reward!\nYou can withdraw them whenever you want! :)"
+                  "You won the quiz! \nYou can withdraw the reward whenever you want! :)"
                 );
+                window.location.reload(false);
               });
               this.socket.on("updateUserId", ({ id }) => {
                 if (this.id == "") {
@@ -334,9 +319,6 @@ class ClientView extends Component {
                 alert("Oops! Admin has left the room, you will be charged back with " + amount + " KMC.\n You will see the refund in the 'Rewards' section.")
                 window.location.reload(false);
               });
-              
-
-              console.log("after waiting lobby");
               this.setState({ waitingLobby: true });
             });
         });
@@ -349,7 +331,6 @@ class ClientView extends Component {
 
     let username = this.username;
     let room = this.room;
-    console.log(seconds);
     seconds = seconds - 1;
     document.getElementById("timer").innerHTML = seconds;
     if (seconds < 1) {
@@ -357,11 +338,18 @@ class ClientView extends Component {
       this.setState({
         viewTimerEnded: true,
       });
-      console.log("currwnt q: " + this.state.currQuestion);
       if (this.state.currQuestion == 9) {
         this.setState({
           quizEnded: true,
         });
+        setTimeout(function () {
+          if (newState == -1) {
+            if(document.getElementById("imWinner").innerHTML != "You Won!") {
+              alert('Sorry, you did not win.\nMaybe next time? :)');
+              window.location.reload(false);
+            }
+          }
+      }, 2000);
       }
     }
   };

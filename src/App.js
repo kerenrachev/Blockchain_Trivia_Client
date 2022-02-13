@@ -46,7 +46,6 @@ class App extends Component {
   loadBlockchainData = (event) => {
     event.preventDefault()
     if (window.ethereum) {
-      console.log(window.ethereum)
       window.ethereum.request({ method: 'eth_requestAccounts' }).then(addressResult => {
         this.setState({ account: addressResult[0] })
         this.showNumOfCoins(event)

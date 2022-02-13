@@ -48,7 +48,6 @@ class PostForm extends Component {
 
             )
             .then(response => {
-                console.log("Response is: " + response.data)
                 this.setState({ quizID: response.data });
             })
             .catch(error => {
