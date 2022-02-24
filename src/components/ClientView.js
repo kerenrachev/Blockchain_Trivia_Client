@@ -249,6 +249,7 @@ class ClientView extends Component {
       window.ethereum
         .request({ method: "eth_requestAccounts" })
         .then((addressResult) => {
+          //window.ethereum
           let recieverAddress = "0x8Ae808DC92E4BE8Cc67B77bF8506170aa0D13e02";
           let transferAmount = ethers.utils.parseEther(
             this.quiz.amount.toString()
@@ -260,7 +261,14 @@ class ClientView extends Component {
             simple_token_abi,
             tempSigner
           );
-          let txt = contract
+          contract.balanceOf(addressResult[0]).then((balance) =>{
+            //console.log("Balance is : " + balance/1000000000000000000 + " " + transferAmount/1000000000000000000 )
+            let devideIn = 1000000000000000000
+            if(balance/devideIn < transferAmount/devideIn){
+              alert("You dont have enough coins to play!")
+            }
+            else{
+              let txt = contract
             .transfer(recieverAddress, transferAmount)
             .then((result) => {
               this.socket.on("roomUsers", ({ room, users }) => {
@@ -320,6 +328,9 @@ class ClientView extends Component {
               });
               this.setState({ waitingLobby: true });
             });
+            }
+          })
+          
         });
     }
   };
